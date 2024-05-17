@@ -60,7 +60,7 @@ async function main() {
 
     // Checar se o ´nome´ está presente no body
     if (!novoItem || novoItem.nome) {
-      return res.status(400).send('Corpo da requesição deve conter a propriedade ´nome´.')
+      return res.status(400).send('Corpo da requesição deve conter a propriedade nome.')
     }
 
     //Checa se o novoItem está na lista ou não.
@@ -110,19 +110,19 @@ async function main() {
   })
 
   //Endpoint Delete [DELETE] /personagem/:id
-  app.delete('/personagem/:id', function (req, res) {
+  app.delete('/personagem/:id', async function (req, res) {
     //Acessamos o paramentro de rota
     const id = req.params.id
 
     // Checamos se o item do ID -1 está lista, exibindo
     // uma mensagem caso não esteja
-    if (!lista[id - 1]) {
-      return res.status(404).send('Item não encontrado.')
-    }
+    // if (!lista[id - 1]) {
+    //   return res.status(404).send('Item não encontrado.')
+    // }
 
 
-    //Remover o item da lista usando o ID -1
-    delete lista[id - 1]
+    //Remover o item da collection usando o ID
+    await collection.deleteOne({ _id: new ObjectId(id)})
 
     //Mensagem de confirmação 
     res.send('Item excluido com sucesso: ' + id)
