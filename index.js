@@ -76,41 +76,40 @@ async function main() {
   })
 
   //Endpoint Update [PUT] /personagem/:id
-  app.put('/personagem/:id', function (req, res) {
+  app.put('/personagem/:id', async function (req, res) {
     //Acessamos o ID dos parâmetros de rota 
     const id = req.params.id
 
     // Checamos se o item do ID -1 está lista, exibindo
     // uma mensagem caso não esteja
-    if (!lista[id - 1]) {
-      return res.status(404).send('Item não encontrado.')
-    }
+    // if (!lista[id - 1]) {
+    //   return res.status(404).send('Item não encontrado.')
+    // }
 
     //Acessamos o Body da requisição 
-    const body = req.body
-
-    //Acessamos a propridade 'Nome' no body
-    const novoItem = body.nome
-
+    const novoItem = req.body
 
     // Checar se o ´nome´ está presente no body
-    if (!novoItem) {
+    if (!novoItem || !novoItem.nome) {
       return res.status(400).send('Corpo da requesição deve conter a propriedade ´nome´.')
     }
 
     //Checa se o novoItem está na lista ou não.
-    if (lista.includes(novoItem)) {
-      return res.status(409).send('Item duplicado! "Item ja existe na lista"')
-    }
+    // if (lista.includes(novoItem)) {
+    //   return res.status(409).send('Item duplicado! "Item ja existe na lista"')
+    // }
 
-    //Reformulamos na lista o novo Item pelo ID -1 
-    lista[id - 1] = novoItem
+    //Atualizamos na collection o novo Item pelo ID
+    await collection.updateOne(
+      { _id: new ObjectId(id)},
+      { $set: novoItem}
+    )
 
     //Enviamos uma mensgem de sucesso
-    res.send('Item atualizado com sucesso: ' + id + ' - ' + novoItem)
+    res.send(novoItem)
   })
 
-  //Endpoint Delete `[DELETE] /personagem/:id
+  //Endpoint Delete [DELETE] /personagem/:id
   app.delete('/personagem/:id', function (req, res) {
     //Acessamos o paramentro de rota
     const id = req.params.id
