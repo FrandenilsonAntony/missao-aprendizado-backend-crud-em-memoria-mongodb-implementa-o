@@ -1,7 +1,8 @@
+require('dotenv').config()
 const express = require('express')
 const { MongoClient, ObjectId } = require('mongodb')
 //Preparamos as informaçoes de acesso ao banco de dados
-const dbUrl = 'mongodb+srv://admin:bhVmqUkLbeHhaOrk@cluster0.cxt5ufa.mongodb.net'
+const dbUrl = process.env.DATABASE_URL
 const dbName = 'mongodb-implementacao'
 
 //Declaramos a função main()
