@@ -2,7 +2,7 @@
   "name": "missao-aprendizado-backend-crud-em-memoria-mongodb-implementa-o",
   "version": "1.0.0",
   "description": "Projeto Aprendizado criando CRUD em Memória da Profissão Dev BackEnd com Nodejs, Expressjs, Javascripts e GitHub CodeSpace com implementção do MongoDB ao CRUD para armaanar os dados em Nuvem.",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "start": "node .",
     "dev": "nodemon ."

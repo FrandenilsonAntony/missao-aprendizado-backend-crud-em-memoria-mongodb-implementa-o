@@ -92,7 +92,7 @@ async function main() {
 
     // Checar se o ´nome´ está presente no body
     if (!novoItem || !novoItem.nome) {
-      return res.status(400).send('Corpo da requesição deve conter a propriedade ´nome´.')
+      return res.status(400).send('Corpo da requesição deve conter a propriedade nome.')
     }
 
     //Checa se o novoItem está na lista ou não.
