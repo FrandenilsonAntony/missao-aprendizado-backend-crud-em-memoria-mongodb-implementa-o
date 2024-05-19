@@ -1,30 +1,24 @@
 require('dotenv').config()
 const express = require('express')
-const { MongoClient, ObjectId } = require('mongodb')
-//Preparamos as informaçoes de acesso ao banco de dados
-const dbUrl = process.env.DATABASE_URL
-const dbName = 'mongodb-implementacao'
+const { connectToDatabase } = require('./db/database-connection')
 
 //Declaramos a função main()
 async function main() {
-  //Realizamos a conexão com DataBase
-  const client = new MongoClient(dbUrl)
-  console.log('Conectando ao Data Base: Nuvem')
-  console.log('...............................')
-  await client.connect()
-  console.log('Data Base conectado com sucesso!')
-  
-  const db = client.db(dbName)
-  const collection = db.collection('personagem')
+  //FIX: Ultiliar o connectToDatabase() e receber o DB
+  await connectToDatabase()
+  //const collection = db.collection('personagem')
 
   const app = express()
+   //Middlewares
+   //Sinalia para o Express que estamos usando o JSON no Body
+   app.use(express.json())
 
   app.get('/', function (req, res) {
     res.send('Hello World!')
   })
 
-  const lista = ['Java', 'Kotlin', 'Android']
-
+  //FIX: Mover isso para pasta ´personagem´
+/*
   //Endpoint Read All [GET] /personagem
   app.get('/personagem', async function (req, res) {
     //Acessamos a lista de itens na collection do MongoDb
@@ -51,16 +45,14 @@ async function main() {
     res.send(item)
   })
 
-  //Sinalia para o Express que estamos usando o JSON no Body
-  app.use(express.json())
-
+ 
   //Endpoint Create [POST] /personagem
   app.post('/personagem', async function (req, res) {
     //Acessamos o Body da requisição
     const novoItem = req.body
 
     // Checar se o ´nome´ está presente no body
-    if (!novoItem || novoItem.nome) {
+    if (!novoItem || !novoItem.nome) {
       return res.status(400).send('Corpo da requesição deve conter a propriedade nome.')
     }
 
@@ -128,8 +120,10 @@ async function main() {
     //Mensagem de confirmação 
     res.send('Item excluido com sucesso: ' + id)
   })
-
-  app.listen(3000)
+*/
+  app.listen(3000, function () {
+    console.log("Servidor rodando em http://localhost:3000")
+  })
 }
 
 //Executamos a função main()
