@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const { connectToDatabase } = require('./db/database-connection')
+const personagemRouter = require('./personagem/personagem.router')
 
 //Declaramos a função main()
 async function main() {
@@ -17,6 +18,7 @@ async function main() {
     res.send('Hello World!')
   })
 
+  app.use('/personagem', personagemRouter)
   //FIX: Mover isso para pasta ´personagem´
 /*
   //Endpoint Read All [GET] /personagem
