@@ -22,27 +22,6 @@ async function main() {
   //FIX: Mover isso para pasta ´personagem´
 /*
   
-  //Endpoint Create [POST] /personagem
-  app.post('/personagem', async function (req, res) {
-    //Acessamos o Body da requisição
-    const novoItem = req.body
-
-    // Checar se o ´nome´ está presente no body
-    if (!novoItem || !novoItem.nome) {
-      return res.status(400).send('Corpo da requesição deve conter a propriedade nome.')
-    }
-
-    //Checa se o novoItem está na lista ou não.
-    // if (lista.includes(novoItem)) {
-    //   return res.status(409).send('Item duplicado! "Item ja existe na lista"')
-    // }
-
-    //Adicionamos na collection
-    await collection.insertOne(novoItem)
-
-    //Exibimos uma mensagem de sucesso
-    res.status(201).send(novoItem)
-  })
 
   //Endpoint Update [PUT] /personagem/:id
   app.put('/personagem/:id', async function (req, res) {
