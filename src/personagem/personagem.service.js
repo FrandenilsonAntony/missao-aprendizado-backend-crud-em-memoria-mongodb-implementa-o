@@ -5,6 +5,7 @@ function getColletion() {
 }
 
 function readAll() {
+  //Acessamos a lista de personagens na collection do MongoDB
   return getColletion().find().toArray()
 }
 
@@ -16,7 +17,7 @@ function create() {
 
 function updateById() {
 }
-
+  
 function deleteById() {
 }
 module.exports = {
