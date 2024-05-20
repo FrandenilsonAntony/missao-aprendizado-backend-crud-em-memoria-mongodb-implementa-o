@@ -1,4 +1,5 @@
-const { getDatabase } = require("../db/database-connection")
+const { ObjectId } = require('mongodb')
+const { getDatabase } = require('../db/database-connection')
 
 function getColletion() {
   return getDatabase().collection('personagem')
@@ -9,7 +10,14 @@ function readAll() {
   return getColletion().find().toArray()
 }
 
-function readById() {
+/**
+ * 
+ * @param {string} id 
+ * @returns 
+ */
+function readById(id) {
+  //Retorna o item na collection usando o ID
+  return getColletion().findOne({ _id: new ObjectId(id)})
 }
 
 function create() {
@@ -17,7 +25,7 @@ function create() {
 
 function updateById() {
 }
-  
+
 function deleteById() {
 }
 module.exports = {

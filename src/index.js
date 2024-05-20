@@ -21,26 +21,7 @@ async function main() {
   app.use('/personagem', personagemRouter)
   //FIX: Mover isso para pasta ´personagem´
 /*
- 
-  //Endpoint Read by ID [GET] /personagem/:id
-  app.get('/personagem/:id', async function (req, res) {
-    //Acessamos o parâmetro de rota pelo ID
-    const id = req.params.id
-
-    //Acessa o item na collection usando o ID
-    const item = await collection.findOne({ _id: new ObjectId(id)})
-
-
-    // Checamos se o item obtido é existente
-    if (!item) {
-      return res.status(404).send('Item não encontrado.')
-    }
-
-    //Enviamos o valor do item como resposta
-    res.send(item)
-  })
-
- 
+  
   //Endpoint Create [POST] /personagem
   app.post('/personagem', async function (req, res) {
     //Acessamos o Body da requisição
