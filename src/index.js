@@ -5,27 +5,25 @@ const personagemRouter = require('./personagem/personagem.router')
 
 //Declaramos a função main()
 async function main() {
-  //FIX: Ultiliar o connectToDatabase() e receber o DB
+  //Conectamos ao DB
   await connectToDatabase()
-  //const collection = db.collection('personagem')
-
+  
+  //Iniciamos o Express
   const app = express()
+
    //Middlewares
    //Sinalia para o Express que estamos usando o JSON no Body
    app.use(express.json())
 
+   //Endpoint de Hello World
   app.get('/', function (req, res) {
     res.send('Hello World!')
   })
 
+  //Routers
   app.use('/personagem', personagemRouter)
-  //FIX: Mover isso para pasta ´personagem´
-/*
+  
 
-  //Endpoint Delete [DELETE] /personagem/:id
-  app.delete('/personagem/:id', async function (req, res) {
-    
-*/
   app.listen(3000, function () {
     console.log("Servidor rodando em http://localhost:3000")
   })
